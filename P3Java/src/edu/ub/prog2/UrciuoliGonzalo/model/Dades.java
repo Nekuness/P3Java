@@ -66,7 +66,7 @@ public class Dades implements Serializable {
         }
 
     }
-
+    
     public List<String> mostrarBiblioteca() {
         List<String> s1 = new ArrayList<String>();
         for (int i = 0; i < biblio.getSize(); i++) {
@@ -104,5 +104,33 @@ public class Dades implements Serializable {
         System.out.println("Fitxer carregat amb exit");
 
     }
-
+    
+    public void afegirAlbum(String titolAlbum) {
+        AlbumFitxersMultimedia album = new AlbumFitxersMultimedia(titolAlbum);
+        
+    }
+    
+    public List<String> mostrarLlistatAlbums() {
+        
+    }
+    
+    public void esborrarAlbum(String titolAlbum) {
+        
+    }
+    
+    public boolean existeixAlbum(String titolAlbum) {
+        
+    }
+    
+    public void afegirFitxer(String titolAlbum, int id) {
+        
+    }
+    
+    public List<String> mostrarAlbum(String titolAlbum) {
+        
+    }
+    
+    public void esborrarFitxer(String titolAlbum, int id) {
+        
+    }
 }
