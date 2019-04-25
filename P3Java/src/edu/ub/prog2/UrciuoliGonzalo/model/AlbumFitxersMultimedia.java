@@ -11,6 +11,17 @@ public class AlbumFitxersMultimedia {
         carpeta = new CarpetaFitxers(10);
         this.titol = titol;
     }
-
+    
+    public String toString() {
+        return titol;
+    }
+    
+    public void addFitxerAudio(Audio fitxer) {
+        carpeta.addFitxer(fitxer);
+    }
+    
+    public void addFitxerVideo(Video fitxer) {
+        carpeta.addFitxer(fitxer);
+    }
 }
 

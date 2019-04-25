@@ -38,10 +38,15 @@ public class Dades implements Serializable {
     }
 
     public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException, AplicationException, IOException {
-
+        boolean exists = true;
         try {
             Video v1 = new Video(path, nomVideo, codec, durada, alcada, amplada, fps, r);
-            biblio.addFitxer(v1);
+            if (!v1.exists()) {
+                exists = false;
+                System.out.println("El fitxer no existeix en el camí");
+            } else if (exists) {
+                biblio.addFitxer(v1);
+            }
         } catch (RuntimeException e) {
             System.out.println("No s'ha pogut carregar el VLC");
         }
@@ -54,10 +59,17 @@ public class Dades implements Serializable {
     }
 
     public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException, AplicationException {
+        boolean exists = true;
         try {
             FitxerMultimedia img1 = new FitxerMultimedia(camiImatge);
             Audio a1 = new Audio(cami, img1, nomAudio, codec, durada, r, kbps);
-            biblio.addFitxer(a1);
+            if (!a1.exists()) {
+                exists = false;
+                System.out.println("El fitxer no existeix en el camí");
+            }
+            else if (exists) {
+                biblio.addFitxer(a1);
+            }
         } catch (RuntimeException e) {
             System.out.println("No s'ha pogut carregar el VLC");
         }
@@ -66,7 +78,7 @@ public class Dades implements Serializable {
         }
 
     }
-    
+
     public List<String> mostrarBiblioteca() {
         List<String> s1 = new ArrayList<String>();
         for (int i = 0; i < biblio.getSize(); i++) {
@@ -104,33 +116,5 @@ public class Dades implements Serializable {
         System.out.println("Fitxer carregat amb exit");
 
     }
-    
-    public void afegirAlbum(String titolAlbum) {
-        AlbumFitxersMultimedia album = new AlbumFitxersMultimedia(titolAlbum);
-        
-    }
-    
-    public List<String> mostrarLlistatAlbums() {
-        
-    }
-    
-    public void esborrarAlbum(String titolAlbum) {
-        
-    }
-    
-    public boolean existeixAlbum(String titolAlbum) {
-        
-    }
-    
-    public void afegirFitxer(String titolAlbum, int id) {
-        
-    }
-    
-    public List<String> mostrarAlbum(String titolAlbum) {
-        
-    }
-    
-    public void esborrarFitxer(String titolAlbum, int id) {
-        
-    }
+
 }
