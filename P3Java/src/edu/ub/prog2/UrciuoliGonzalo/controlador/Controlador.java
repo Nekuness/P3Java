@@ -8,6 +8,7 @@ package edu.ub.prog2.UrciuoliGonzalo.controlador;
 import edu.ub.prog2.UrciuoliGonzalo.model.AplicationException;
 import edu.ub.prog2.UrciuoliGonzalo.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
+import edu.ub.prog2.utils.InControlador;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author digit
  */
-public class Controlador {
+public class Controlador implements InControlador{
 
     Dades d1 = new Dades();
 
@@ -50,5 +51,80 @@ public class Controlador {
 
     public void afegirAlbum(String titolAlbum) {
         d1.afegirAlbum(titolAlbum);
+    }
+
+    @Override
+    public void reproduirFitxer(int i) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<String> mostrarLlistatAlbums() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void esborrarAlbum(String string) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean existeixAlbum(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void afegirFitxer(String string, int i) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<String> mostrarAlbum(String string) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void esborrarFitxer(String string, int i) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void obrirFinestraReproductor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void tancarFinestraReproductor() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reproduirCarpeta() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reproduirCarpeta(String string) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reemprenReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void pausaReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aturaReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void saltaReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
