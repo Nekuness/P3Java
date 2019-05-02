@@ -6,7 +6,10 @@
 package edu.ub.prog2.UrciuoliGonzalo.model;
 
 import edu.ub.prog2.UrciuoliGonzalo.controlador.Reproductor;
+import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,7 +28,11 @@ public class Audio extends FitxerReproduible{
 
     @Override
     protected void reproduir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            r.play(this, fitxerimatge);
+        } catch (AplicacioException ex) {
+            Logger.getLogger(Audio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -7,6 +7,7 @@ package edu.ub.prog2.UrciuoliGonzalo.model;
 
 import edu.ub.prog2.UrciuoliGonzalo.controlador.Reproductor;
 import com.sun.jna.Native;
+import edu.ub.prog2.UrciuoliGonzalo.controlador.Escoltador;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +34,8 @@ public class Dades implements Serializable {
     int MAX_SIZE = 100;
     BibliotecaFitxerMultimedia biblio = new BibliotecaFitxerMultimedia(MAX_SIZE);
     ArrayList<AlbumFitxersMultimedia> albums;
-    Reproductor r = new Reproductor();
+    Escoltador e = new Escoltador();
+    Reproductor r = new Reproductor("C:\\Program Files\\VideoLAN\\VLC",e);
 
     public Dades() {
     }
@@ -109,10 +111,10 @@ public class Dades implements Serializable {
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException, FileNotFoundException, IOException, ClassNotFoundException {
         File fitxer = new File(camiOrigen);
         FileInputStream fin = new FileInputStream(fitxer);
-        ObjectInputStream ois = new ObjectInputStream(fin);
-        BibliotecaFitxerMultimedia d2 = (BibliotecaFitxerMultimedia) ois.readObject();
-        this.biblio = d2;
-        ois.close();
+        try (ObjectInputStream ois = new ObjectInputStream(fin)) {
+            BibliotecaFitxerMultimedia d2 = (BibliotecaFitxerMultimedia) ois.readObject();
+            this.biblio = d2;
+        }
         System.out.println("Fitxer carregat amb exit");
 
     }

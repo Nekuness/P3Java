@@ -6,6 +6,9 @@
 package edu.ub.prog2.UrciuoliGonzalo.model;
 
 import edu.ub.prog2.UrciuoliGonzalo.controlador.Reproductor;
+import edu.ub.prog2.utils.AplicacioException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +30,11 @@ public class Video extends FitxerReproduible{
 
     @Override
     protected void reproduir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            r.play(this);
+        } catch (AplicacioException ex) {
+            Logger.getLogger(Video.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     

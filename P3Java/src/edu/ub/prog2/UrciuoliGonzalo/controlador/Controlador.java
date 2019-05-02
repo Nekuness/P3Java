@@ -41,10 +41,11 @@ public class Controlador implements InControlador{
         d1.esborrarFitxer(id);
     }
 
+    @Override
     public void guardarDadesDisc(String camiDesti) throws AplicacioException, IOException {
         d1.guardarDadesDisc(camiDesti);
     }
-
+    @Override
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException, IOException, FileNotFoundException, ClassNotFoundException {
         d1.carregarDadesDisc(camiOrigen);
     }
