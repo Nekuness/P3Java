@@ -29,7 +29,7 @@ public class Audio extends FitxerReproduible{
     @Override
     protected void reproduir() {
         try {
-            r.play(this, fitxerimatge);
+            r.reprodueix(this, fitxerimatge);
         } catch (AplicacioException ex) {
             Logger.getLogger(Audio.class.getName()).log(Level.SEVERE, null, ex);
         }

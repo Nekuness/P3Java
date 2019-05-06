@@ -31,7 +31,7 @@ public class Video extends FitxerReproduible{
     @Override
     protected void reproduir() {
         try {
-            r.play(this);
+            r.reprodueix(this);
         } catch (AplicacioException ex) {
             Logger.getLogger(Video.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -183,12 +183,14 @@ public class Dades implements Serializable {
     }
 
     public void esborrarFitxer(String titolAlbum, int id) {
-        FitxerMultimedia fitxer = (FitxerMultimedia) biblio.getAt(id);
+        FitxerMultimedia fitxer = (FitxerReproduible) biblio.getAt(id);
         for (int i = 0; i < albums.size(); i++) {
             if (albums.get(i).titol.equals(titolAlbum)) {
-                albums.get(i).carpeta.removeFitxer(fitxer);
+                albums.get(i).carpeta.removeFitxer((FitxerReproduible) fitxer);
             }
         }
     }
-    
+    public void reproduirFitxer(int i) throws AplicacioException {
+        biblio.carpeta.get(i).reproduir();
+    }
 }

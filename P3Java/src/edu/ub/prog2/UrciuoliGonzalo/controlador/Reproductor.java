@@ -26,11 +26,11 @@ public class Reproductor extends ReproductorBasic{
         super(vlcPath,controlador);
     }
     
-    void reprodueix(FitxerReproduible fr) throws AplicacioException{
+    public void reprodueix(FitxerReproduible fr) throws AplicacioException{
         play(fr);
     }
     
-    void reprodueix(Audio audio, File fitxerImage) throws AplicacioException{
+    public void reprodueix(Audio audio, File fitxerImage) throws AplicacioException{
         play(audio,fitxerImage);
     }
 }
