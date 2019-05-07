@@ -40,7 +40,7 @@ public class Dades implements Serializable {
     public Dades() {
     }
 
-    public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException, AplicationException, IOException {
+    public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException {
         boolean exists = true;
         try {
             Video v1 = new Video(path, nomVideo, codec, durada, alcada, amplada, fps, r);
@@ -56,12 +56,12 @@ public class Dades implements Serializable {
 
         if (biblio.getSize()
                 >= MAX_SIZE) {
-            throw new AplicationException("La biblioteca esta plena");
+            throw new AplicacioException("La biblioteca esta plena");
         }
 
     }
 
-    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException, AplicationException {
+    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException {
         boolean exists = true;
         try {
             FitxerMultimedia img1 = new FitxerMultimedia(camiImatge);
@@ -76,7 +76,7 @@ public class Dades implements Serializable {
             System.out.println("No s'ha pogut carregar el VLC");
         }
         if (biblio.getSize() >= MAX_SIZE) {
-            throw new AplicationException("La biblioteca esta plena");
+            throw new AplicacioException("La biblioteca esta plena");
         }
 
     }
@@ -100,7 +100,7 @@ public class Dades implements Serializable {
         if (fitxer.createNewFile()) {
             System.out.println("Fitxer creat");
         } else {
-            throw new IOException("El fitxer ya esta creat");
+            throw new AplicacioException("El fitxer ya esta creat");
         }
         FileOutputStream fout = new FileOutputStream(fitxer);
         ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -108,7 +108,7 @@ public class Dades implements Serializable {
 
     }
 
-    public void carregarDadesDisc(String camiOrigen) throws AplicacioException, FileNotFoundException, IOException, ClassNotFoundException {
+    public void carregarDadesDisc(String camiOrigen) throws AplicacioException, IOException, ClassNotFoundException {
         File fitxer = new File(camiOrigen);
         FileInputStream fin = new FileInputStream(fitxer);
         try (ObjectInputStream ois = new ObjectInputStream(fin)) {

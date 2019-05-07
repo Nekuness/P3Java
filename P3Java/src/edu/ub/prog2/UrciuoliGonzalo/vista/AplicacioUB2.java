@@ -1,6 +1,5 @@
 package edu.ub.prog2.UrciuoliGonzalo.vista;
 import edu.ub.prog2.UrciuoliGonzalo.controlador.Controlador;
-import edu.ub.prog2.UrciuoliGonzalo.model.AplicationException;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
 import java.io.FileNotFoundException;
@@ -97,7 +96,7 @@ public class AplicacioUB2 {
                     Scanner teclat = new Scanner(System.in);
                     try {
                         gestioMenuTerciari(teclat);
-                    } catch (AplicationException ex) {
+                    } catch (AplicacioException ex) {
                         Logger.getLogger(AplicacioUB2.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
@@ -161,7 +160,7 @@ public class AplicacioUB2 {
         }
     }
     
-    void gestioMenuTerciari(Scanner sc) throws AplicationException, IOException, FileNotFoundException, ClassNotFoundException{
+    void gestioMenuTerciari(Scanner sc) throws AplicacioException, IOException, FileNotFoundException, ClassNotFoundException{
         System.out.println("Has triat la opció afegir fitxer multimedia a la biblioteca");
         int opcio;
         do {
@@ -204,12 +203,10 @@ public class AplicacioUB2 {
             c1.afegirVideo(path, nomVideo, codec, durada, alcada, amplada, fps);
         } catch (AplicacioException ex) {
             Logger.getLogger(AplicacioUB2.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (AplicationException ex) {
-            Logger.getLogger(AplicacioUB2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    void Submenu2OP2(Scanner sc) throws AplicationException{
+    void Submenu2OP2(Scanner sc) throws AplicacioException{
         String path, pathImatge,nomAudio, codec;
         float durada;
         int kbps;
@@ -227,7 +224,7 @@ public class AplicacioUB2 {
         kbps = sc.nextInt();
         try {
             c1.afegirAudio(path, pathImatge, nomAudio, codec, durada, kbps);
-        } catch (AplicacioException | AplicationException ex) {
+        } catch (AplicacioException ex) {
             Logger.getLogger(AplicacioUB2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
