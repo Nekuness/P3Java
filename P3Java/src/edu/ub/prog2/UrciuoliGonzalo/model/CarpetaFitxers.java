@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class CarpetaFitxers {
 
     int tamany = 100;
-    ArrayList<FitxerMultimedia> carpeta = new ArrayList<>(tamany);
+    ArrayList<FitxerReproduible> carpeta = new ArrayList<>(tamany);
     int size;
 
     public CarpetaFitxers() {
@@ -22,7 +22,7 @@ public class CarpetaFitxers {
         return carpeta.size();
     }
 
-    public void addFitxer(FitxerMultimedia fitxer) {
+    public void addFitxer(FitxerReproduible fitxer) {
         boolean check = false;
         for (int i = 0; i < carpeta.size(); i++) {
             if (fitxer.getNom().equals(carpeta.get(i).getNom())) {
@@ -37,7 +37,7 @@ public class CarpetaFitxers {
         }
     }
 
-    public void removeFitxer(FitxerMultimedia fitxer) {
+    public void removeFitxer(FitxerReproduible fitxer) {
         carpeta.remove(fitxer);
     }
 

@@ -7,6 +7,7 @@ package edu.ub.prog2.UrciuoliGonzalo.model;
 
 import edu.ub.prog2.UrciuoliGonzalo.controlador.Reproductor;
 import com.sun.jna.Native;
+import edu.ub.prog2.UrciuoliGonzalo.controlador.Escoltador;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,10 +32,21 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 public class Dades implements Serializable {
 
     int MAX_SIZE = 100;
+    int MAX_SIZE_ALBUM = 10;
     BibliotecaFitxerMultimedia biblio = new BibliotecaFitxerMultimedia(MAX_SIZE);
-    Reproductor r = new Reproductor();
+    ArrayList<AlbumFitxersMultimedia> albums = new ArrayList(MAX_SIZE_ALBUM);
+    Escoltador e = new Escoltador();
+    Reproductor r = new Reproductor("C:\\Program Files\\VideoLAN\\VLC", e);
 
     public Dades() {
+    }
+    
+    public File seleccionBiblio(int id) {
+        return biblio.getAt(id);
+    }
+
+    public AlbumFitxersMultimedia seleccionAlbum(int id) {
+        return albums.get(id);
     }
 
     public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException, AplicationException, IOException {
@@ -66,8 +78,7 @@ public class Dades implements Serializable {
             if (!a1.exists()) {
                 exists = false;
                 System.out.println("El fitxer no existeix en el camí");
-            }
-            else if (exists) {
+            } else if (exists) {
                 biblio.addFitxer(a1);
             }
         } catch (RuntimeException e) {
@@ -91,6 +102,14 @@ public class Dades implements Serializable {
     public void esborrarFitxer(int id) throws AplicacioException {
         id--;
         biblio.carpeta.remove(id);
+        String titolAlbum = biblio.carpeta.get(id).nom;
+        FitxerMultimedia fitxer = (FitxerReproduible) biblio.getAt(id);
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).titol.equals(titolAlbum)) {
+                albums.get(i).carpeta.removeFitxer((FitxerReproduible) fitxer);
+            }
+        }
+
     }
 
     public void guardarDadesDisc(String camiDesti) throws AplicacioException, FileNotFoundException, IOException {
@@ -109,12 +128,95 @@ public class Dades implements Serializable {
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException, FileNotFoundException, IOException, ClassNotFoundException {
         File fitxer = new File(camiOrigen);
         FileInputStream fin = new FileInputStream(fitxer);
-        ObjectInputStream ois = new ObjectInputStream(fin);
-        BibliotecaFitxerMultimedia d2 = (BibliotecaFitxerMultimedia) ois.readObject();
-        this.biblio = d2;
-        ois.close();
+        try (ObjectInputStream ois = new ObjectInputStream(fin)) {
+            BibliotecaFitxerMultimedia d2 = (BibliotecaFitxerMultimedia) ois.readObject();
+            this.biblio = d2;
+        }
         System.out.println("Fitxer carregat amb exit");
 
     }
 
+    public void afegirAlbum(String titolAlbum) {
+        AlbumFitxersMultimedia album = new AlbumFitxersMultimedia(titolAlbum);
+        albums.add(album);
+    }
+
+    public List<String> mostrarLlistatAlbums() {
+        ArrayList<String> mostrar = new ArrayList();
+        String m;
+        for (int i = 0; i < albums.size(); i++) {
+            m = "[" + i + 1 + "] " + albums.get(i).toString();
+            mostrar.add(m);
+        }
+        return mostrar;
+    }
+
+    public void esborrarAlbum(String titolAlbum) {
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).titol.equals(titolAlbum)) {
+                albums.remove(i);
+            }
+        }
+    }
+
+    public boolean existeixAlbum(String titolAlbum) {
+        boolean existeix = false;
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).titol.equals(titolAlbum)) {
+                existeix = true;
+            }
+        }
+        return existeix;
+    }
+
+    public void afegirFitxer(String titolAlbum, int id) {
+        if (biblio.getAt(id) instanceof Video) {
+            Video fitxer = (Video) biblio.getAt(id);
+            for (int i = 0; i < albums.size(); i++) {
+                if (albums.get(i).titol.equals(titolAlbum)) {
+                    albums.get(i).addFitxerVideo(fitxer);
+                }
+            }
+        } else if (biblio.getAt(id) instanceof Audio) {
+            Audio fitxer = (Audio) biblio.getAt(id);
+            for (int i = 0; i < albums.size(); i++) {
+                if (albums.get(i).titol.equals(titolAlbum)) {
+                    albums.get(i).addFitxerAudio(fitxer);
+                }
+            }
+        }
+    }
+
+    public List<String> mostrarAlbum(String titolAlbum) {
+        ArrayList<String> mostrar = new ArrayList();
+        String m;
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).titol.equals(titolAlbum)) {
+                m = albums.get(i).carpeta.toString();
+                mostrar.add(m);
+            }
+        }
+        return mostrar;
+    }
+
+    public void esborrarFitxer(String titolAlbum, int id) {
+        FitxerMultimedia fitxer = (FitxerReproduible) biblio.getAt(id);
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).titol.equals(titolAlbum)) {
+                albums.get(i).carpeta.removeFitxer((FitxerReproduible) fitxer);
+            }
+        }
+    }
+
+    public void reproduirFitxer(int i) throws AplicacioException {
+        biblio.carpeta.get(i).reproduir();
+    }
+    
+    public void reprContinua() {
+        
+    }
+    
+    public void reprAleatoria() {
+        
+    }
 }

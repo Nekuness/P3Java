@@ -46,6 +46,7 @@ public class FitxerMultimedia extends File {
             equals = true;
         return equals;
     }
+    
 
     public String toString() {
         return "Nom: " + getNom() + "\n"

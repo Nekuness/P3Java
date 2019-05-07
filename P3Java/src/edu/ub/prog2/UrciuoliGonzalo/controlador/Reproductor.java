@@ -5,7 +5,12 @@
  */
 package edu.ub.prog2.UrciuoliGonzalo.controlador;
 
+import edu.ub.prog2.UrciuoliGonzalo.model.Audio;
+import edu.ub.prog2.UrciuoliGonzalo.model.FitxerReproduible;
+import edu.ub.prog2.utils.AplicacioException;
+import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import edu.ub.prog2.utils.ReproductorBasic;
+import java.io.File;
 
 /**
  *
@@ -13,13 +18,19 @@ import edu.ub.prog2.utils.ReproductorBasic;
  */
 public class Reproductor extends ReproductorBasic{
     
-    public Reproductor() {
-        super("C:\\Program Files\\VideoLAN\\VLC");
+    public Reproductor(EscoltadorReproduccioBasic controlador) {
+        super(controlador);
     }
     
-    public Reproductor(String vlcPath) {
-        super(vlcPath);
+    public Reproductor(String vlcPath, EscoltadorReproduccioBasic controlador) {
+        super(vlcPath,controlador);
     }
     
+    public void reprodueix(FitxerReproduible fr) throws AplicacioException{
+        play(fr);
+    }
     
+    public void reprodueix(Audio audio, File fitxerImage) throws AplicacioException{
+        play(audio,fitxerImage);
+    }
 }
