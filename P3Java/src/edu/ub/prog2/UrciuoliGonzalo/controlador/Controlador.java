@@ -12,6 +12,8 @@ import edu.ub.prog2.utils.InControlador;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,12 +26,22 @@ public class Controlador implements InControlador{
     public Controlador() {
     }
 
-    public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException, AplicationException, IOException {
-        d1.afegirVideo(path, nomVideo, codec, durada, alcada, amplada, fps);
+    public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException {
+        try {
+            d1.afegirVideo(path, nomVideo, codec, durada, alcada, amplada, fps);
+        } catch (AplicationException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException, AplicationException {
-        d1.afegirAudio(cami, camiImatge, nomAudio, codec, durada, kbps);
+    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException {
+        try {
+            d1.afegirAudio(cami, camiImatge, nomAudio, codec, durada, kbps);
+        } catch (AplicationException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<String> mostrarBiblioteca() {
@@ -41,13 +53,22 @@ public class Controlador implements InControlador{
         d1.esborrarFitxer(id);
     }
 
-    @Override
-    public void guardarDadesDisc(String camiDesti) throws AplicacioException, IOException {
-        d1.guardarDadesDisc(camiDesti);
+    public void guardarDadesDisc(String camiDesti) throws AplicacioException {
+        try {
+            d1.guardarDadesDisc(camiDesti);
+        } catch (IOException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    @Override
-    public void carregarDadesDisc(String camiOrigen) throws AplicacioException, IOException, FileNotFoundException, ClassNotFoundException {
-        d1.carregarDadesDisc(camiOrigen);
+    
+    public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
+        try {
+            d1.carregarDadesDisc(camiOrigen);
+        } catch (IOException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void afegirAlbum(String titolAlbum) {
