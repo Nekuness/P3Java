@@ -232,6 +232,7 @@ public class AplicacioUB2 {
     
     void gestioMenuTerciariS2OP4(Scanner sc) throws AplicationException, IOException, FileNotFoundException, ClassNotFoundException, AplicacioException {
         Scanner teclat = new Scanner(System.in);
+        String titolAlbum;
         int id;
         System.out.println("Has triat la opció gestionar àlbum\n");
         System.out.println("Seleccioneu un àlbum per gestionar\n");
@@ -253,7 +254,9 @@ public class AplicacioUB2 {
                     Submenu3OP1(sc, album);
                     break;
                 case 2:
-                    Submenu2OP2(sc);
+                    System.out.println("Introdueix el titol del àlbum");
+                    titolAlbum = teclat.next();
+                    System.out.println(c1.mostrarAlbum(titolAlbum));
                 case 3:
                     gestioMenuSecundari(sc);
                 case 4:

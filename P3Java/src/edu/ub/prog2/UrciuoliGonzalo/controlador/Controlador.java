@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author digit
  */
-public class Controlador implements InControlador{
+public class Controlador implements InControlador {
 
     Dades d1 = new Dades();
 
@@ -62,7 +62,7 @@ public class Controlador implements InControlador{
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
         try {
             d1.carregarDadesDisc(camiOrigen);
@@ -104,7 +104,7 @@ public class Controlador implements InControlador{
 
     @Override
     public List<String> mostrarAlbum(String string) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return d1.mostrarAlbum(string);
     }
 
     @Override
@@ -151,11 +151,11 @@ public class Controlador implements InControlador{
     public void saltaReproduccio() throws AplicacioException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public AlbumFitxersMultimedia seleccionAlbum(int id) {
         return d1.seleccionAlbum(id);
     }
-    
+
     public File seleccionBiblio(int id) {
         return d1.seleccionBiblio(id);
     }
