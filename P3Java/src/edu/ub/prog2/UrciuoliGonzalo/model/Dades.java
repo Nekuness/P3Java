@@ -32,12 +32,21 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 public class Dades implements Serializable {
 
     int MAX_SIZE = 100;
+    int MAX_SIZE_ALBUM = 10;
     BibliotecaFitxerMultimedia biblio = new BibliotecaFitxerMultimedia(MAX_SIZE);
-    ArrayList<AlbumFitxersMultimedia> albums;
+    ArrayList<AlbumFitxersMultimedia> albums = new ArrayList(MAX_SIZE_ALBUM);
     Escoltador e = new Escoltador();
-    Reproductor r = new Reproductor("C:\\Program Files\\VideoLAN\\VLC",e);
+    Reproductor r = new Reproductor("C:\\Program Files\\VideoLAN\\VLC", e);
 
     public Dades() {
+    }
+    
+    public File seleccionBiblio(int id) {
+        return biblio.getAt(id);
+    }
+
+    public AlbumFitxersMultimedia seleccionAlbum(int id) {
+        return albums.get(id);
     }
 
     public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException, AplicationException, IOException {
@@ -93,6 +102,14 @@ public class Dades implements Serializable {
     public void esborrarFitxer(int id) throws AplicacioException {
         id--;
         biblio.carpeta.remove(id);
+        String titolAlbum = biblio.carpeta.get(id).nom;
+        FitxerMultimedia fitxer = (FitxerReproduible) biblio.getAt(id);
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).titol.equals(titolAlbum)) {
+                albums.get(i).carpeta.removeFitxer((FitxerReproduible) fitxer);
+            }
+        }
+
     }
 
     public void guardarDadesDisc(String camiDesti) throws AplicacioException, FileNotFoundException, IOException {
@@ -128,7 +145,7 @@ public class Dades implements Serializable {
         ArrayList<String> mostrar = new ArrayList();
         String m;
         for (int i = 0; i < albums.size(); i++) {
-            m = "[" + i + "] " + albums.get(i).toString();
+            m = "[" + i + 1 + "] " + albums.get(i).toString();
             mostrar.add(m);
         }
         return mostrar;
@@ -190,6 +207,7 @@ public class Dades implements Serializable {
             }
         }
     }
+
     public void reproduirFitxer(int i) throws AplicacioException {
         biblio.carpeta.get(i).reproduir();
     }

@@ -5,10 +5,12 @@
  */
 package edu.ub.prog2.UrciuoliGonzalo.controlador;
 
+import edu.ub.prog2.UrciuoliGonzalo.model.AlbumFitxersMultimedia;
 import edu.ub.prog2.UrciuoliGonzalo.model.AplicationException;
 import edu.ub.prog2.UrciuoliGonzalo.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -82,12 +84,12 @@ public class Controlador implements InControlador{
 
     @Override
     public List<String> mostrarLlistatAlbums() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return d1.mostrarLlistatAlbums();
     }
 
     @Override
     public void esborrarAlbum(String string) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.esborrarAlbum(string);
     }
 
     @Override
@@ -148,5 +150,13 @@ public class Controlador implements InControlador{
     @Override
     public void saltaReproduccio() throws AplicacioException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public AlbumFitxersMultimedia seleccionAlbum(int id) {
+        return d1.seleccionAlbum(id);
+    }
+    
+    public File seleccionBiblio(int id) {
+        return d1.seleccionBiblio(id);
     }
 }
