@@ -211,4 +211,12 @@ public class Dades implements Serializable {
     public void reproduirFitxer(int i) throws AplicacioException {
         biblio.carpeta.get(i).reproduir();
     }
+    
+    public void reprContinua() {
+        
+    }
+    
+    public void reprAleatoria() {
+        
+    }
 }
