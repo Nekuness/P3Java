@@ -29,7 +29,9 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
         
     }
     
-    protected abstract void reproduir();
+    public abstract void reproduir();
     
-    
+    public void setReproductor(Reproductor r){
+        this.r = r;
+    }
 }

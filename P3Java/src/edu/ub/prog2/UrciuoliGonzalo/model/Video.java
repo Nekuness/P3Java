@@ -29,7 +29,7 @@ public class Video extends FitxerReproduible{
     }
 
     @Override
-    protected void reproduir() {
+    public void reproduir() {
         try {
             r.reprodueix(this);
         } catch (AplicacioException ex) {

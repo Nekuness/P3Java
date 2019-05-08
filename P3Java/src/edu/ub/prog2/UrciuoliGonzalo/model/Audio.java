@@ -27,7 +27,7 @@ public class Audio extends FitxerReproduible{
     }
 
     @Override
-    protected void reproduir() {
+    public void reproduir() {
         try {
             r.reprodueix(this, fitxerimatge);
         } catch (AplicacioException ex) {

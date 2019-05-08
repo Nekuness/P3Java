@@ -8,6 +8,7 @@ package edu.ub.prog2.UrciuoliGonzalo.controlador;
 import edu.ub.prog2.UrciuoliGonzalo.model.AlbumFitxersMultimedia;
 import edu.ub.prog2.UrciuoliGonzalo.model.AplicationException;
 import edu.ub.prog2.UrciuoliGonzalo.model.Dades;
+import edu.ub.prog2.UrciuoliGonzalo.model.FitxerReproduible;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
 import java.io.File;
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
 public class Controlador implements InControlador {
 
     Dades d1 = new Dades();
+    EscoltadorReproductor r = new EscoltadorReproductor();
 
     public Controlador() {
     }
@@ -79,9 +81,20 @@ public class Controlador implements InControlador {
 
     @Override
     public void reproduirFitxer(int i) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try{
+           d1.reproduirFitxer(i);
+       }
+       catch(IllegalArgumentException e){
+           System.out.println("InvalidArgumentException, has introduit la ID correctament?");
+       }
+       catch(AplicacioException e){
+           System.out.println("Aplicacio Exception, has introduit la ID correctament?");
+       }
     }
-
+    
+    public void reproduirFitxer(FitxerReproduible fr){
+        d1.reproduirFitxer(fr);
+    }
     @Override
     public List<String> mostrarLlistatAlbums() {
         return d1.mostrarLlistatAlbums();
@@ -109,27 +122,24 @@ public class Controlador implements InControlador {
 
     @Override
     public void esborrarFitxer(String string, int i) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.esborrarFitxer(string, i);
     }
 
     @Override
     public void obrirFinestraReproductor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.obrirFinestraReproductor();
     }
 
     @Override
     public void tancarFinestraReproductor() throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.tancarFinestraReproductor();
     }
 
     @Override
     public void reproduirCarpeta() throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void reproduirCarpeta(String string) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.obrirFinestraReproductor();
+        r.iniciarReproduccio(d1.biblio, d1.reproduccioCiclica, d1.reproduccioCiclica);
+        d1.tancarFinestraReproductor();
     }
 
     @Override
@@ -158,5 +168,10 @@ public class Controlador implements InControlador {
 
     public File seleccionBiblio(int id) {
         return d1.seleccionBiblio(id);
+    }
+
+    @Override
+    public void reproduirCarpeta(String string) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

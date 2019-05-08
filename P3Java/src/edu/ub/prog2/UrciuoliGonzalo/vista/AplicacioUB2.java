@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import edu.ub.prog2.UrciuoliGonzalo.model.Dades;
 import edu.ub.prog2.UrciuoliGonzalo.model.Video;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AplicacioUB2 {
 
@@ -196,9 +198,10 @@ public class AplicacioUB2 {
 
             switch (opcio) {
                 case MENU_S3_OPCIO1:
-  
+                    
                     break;
                 case MENU_S3_OPCIO2:
+                    SubmenuControlOP2(teclat);
                     break;
                 case MENU_S3_OPCIO3:
                     
@@ -281,10 +284,11 @@ public class AplicacioUB2 {
         String titolAlbum;
         int id;
         System.out.println("Has triat la opció gestionar àlbum\n");
-        System.out.println("Seleccioneu un àlbum per gestionar\n");
+        System.out.println("Seleccioneu la ID d'un àlbum per gestionar\n");
         c1.mostrarLlistatAlbums();
         id = teclat.nextInt() - 1;
         this.album = c1.seleccionAlbum(id);
+        String titol = album.toString();
 
         int opcio;
         do {
@@ -300,9 +304,12 @@ public class AplicacioUB2 {
                     Submenu3OP1(sc, album);
                     break;
                 case 2:
-                    System.out.println("Introdueix el titol del àlbum");
                     titolAlbum = teclat.next();
-                    System.out.println(c1.mostrarAlbum(titolAlbum));
+                    List<String> titols = new ArrayList();
+                    titols = c1.mostrarAlbum(titol);
+                    for(String temp: titols){
+                        System.out.println(temp);
+                    }
                 case 3:
                     gestioMenuSecundari(sc);
                 case 4:
@@ -374,8 +381,23 @@ public class AplicacioUB2 {
         }
     }
 
-    void Submenu3OP2(Scanner sc) {
-
+    void SubmenuControlOP1(Scanner sc) throws AplicacioException{
+        Scanner teclat = new Scanner(System.in);
+        int id;
+        String op;
+        System.out.println("Vols  visualitzar la llista d'arxius per seleccionar la reproducció? (S/N)");
+        op = teclat.next();
+        if(op.equals("S")){
+            c1.mostrarBiblioteca();
+        }
+        System.out.println("Selecciona la ID de l'arxiu a reproduir");
+        id = teclat.nextInt();
+        c1.reproduirFitxer(id);
+        
+    }
+    
+    void SubmenuControlOP2(Scanner sc) throws AplicacioException{
+        c1.reproduirCarpeta();
     }
 
 }

@@ -41,7 +41,7 @@ public class CarpetaFitxers {
         carpeta.remove(fitxer);
     }
 
-    public File getAt(int position) {
+    public FitxerReproduible getAt(int position) {
         return carpeta.get(position);
     }
 
@@ -70,6 +70,14 @@ public class CarpetaFitxers {
         } else {
             return "La biblioteca esta buida";
         }
+    }
+    
+    public int size(){
+        return carpeta.size();
+    }
+    
+    public ArrayList<FitxerReproduible> getCarpeta(){
+        return carpeta;
     }
 
 }

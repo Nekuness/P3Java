@@ -7,8 +7,9 @@ package edu.ub.prog2.UrciuoliGonzalo.model;
 
 import edu.ub.prog2.UrciuoliGonzalo.controlador.Reproductor;
 import com.sun.jna.Native;
-import edu.ub.prog2.UrciuoliGonzalo.controlador.Escoltador;
+import edu.ub.prog2.UrciuoliGonzalo.controlador.EscoltadorReproductor;
 import edu.ub.prog2.utils.AplicacioException;
+import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,13 +31,15 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
  * @author digit
  */
 public class Dades implements Serializable {
-
+    
     int MAX_SIZE = 100;
     int MAX_SIZE_ALBUM = 10;
-    BibliotecaFitxerMultimedia biblio = new BibliotecaFitxerMultimedia(MAX_SIZE);
+    public boolean reproduccioCiclica, reproduccioAleatoria;
+    public BibliotecaFitxerMultimedia biblio = new BibliotecaFitxerMultimedia(MAX_SIZE);
     ArrayList<AlbumFitxersMultimedia> albums = new ArrayList(MAX_SIZE_ALBUM);
-    Escoltador e = new Escoltador();
-    Reproductor r = new Reproductor("C:\\Program Files\\VideoLAN\\VLC", e);
+    private EscoltadorReproductor e = new EscoltadorReproductor();
+    private transient Reproductor r = new Reproductor("C:\\Program Files\\VideoLAN\\VLC", e);
+    
 
     public Dades() {
     }
@@ -188,7 +191,7 @@ public class Dades implements Serializable {
     }
 
     public List<String> mostrarAlbum(String titolAlbum) {
-        ArrayList<String> mostrar = new ArrayList();
+        List<String> mostrar = new ArrayList<>();
         String m;
         for (int i = 0; i < albums.size(); i++) {
             if (albums.get(i).titol.equals(titolAlbum)) {
@@ -211,12 +214,50 @@ public class Dades implements Serializable {
     public void reproduirFitxer(int i) throws AplicacioException {
         biblio.carpeta.get(i).reproduir();
     }
+    public void obrirFinestraReproductor(){
+        this.r.open();
+    }
     
-    public void reprContinua() {
+    public void tancarFinestraReproductor(){
+        this.r.stop();
+    }
+    public void reproduirFitxer(FitxerReproduible fr){
+        obrirFinestraReproductor();
+        fr.reproduir();
+        tancarFinestraReproductor();
+    }
+    
+    
+    
+    public void setReproductor(){
+        for (FitxerReproduible carpeta : biblio.carpeta) {
+            carpeta.setReproductor(r);
+        }
+    }
+    public void repCiclica(){
+        reproduccioCiclica = !reproduccioCiclica;
+        if(reproduccioCiclica){
+            System.out.println("La reproduccio ciclica ha sigut activada");
+        }
+        else{
+            System.out.println("La reproduccio ciclica ha sigut desactivada");
+        }
         
     }
     
-    public void reprAleatoria() {
+    public void repAleatoria(){
+        reproduccioAleatoria = !reproduccioAleatoria;
+        if(reproduccioAleatoria){
+            System.out.println("La reproduccio aleatoria ha sigut activada");
+        }
+        else{
+            System.out.println("La reproduccio aleatoria ha sigut desactivada");
+        }
         
     }
+    
+    
+    
 }
+    
+    
