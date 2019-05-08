@@ -47,7 +47,7 @@ public class EscoltadorReproductor extends EscoltadorReproduccioBasic{
             fr.reproduir();
         }
         else{
-            for(int i = 0; i <= llista.size(); i++){
+            for(int i = 0; i < llista.size(); i++){
                 FitxerReproduible fr = llista.get(i);
                 fr.reproduir();
                 onEndFile();
