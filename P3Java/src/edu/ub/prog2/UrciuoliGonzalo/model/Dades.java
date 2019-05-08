@@ -212,7 +212,9 @@ public class Dades implements Serializable {
     }
 
     public void reproduirFitxer(int i) throws AplicacioException {
-        biblio.carpeta.get(i).reproduir();
+        CarpetaFitxers singular = new CarpetaFitxers(1);
+        singular.addFitxer(biblio.carpeta.get(i));
+        e.iniciarReproduccio(singular, reproduccioCiclica, reproduccioAleatoria);
     }
     public void obrirFinestraReproductor(){
         this.r.open();
@@ -221,10 +223,10 @@ public class Dades implements Serializable {
     public void tancarFinestraReproductor(){
         this.r.stop();
     }
-    public void reproduirFitxer(FitxerReproduible fr){
-        obrirFinestraReproductor();
-        fr.reproduir();
-        tancarFinestraReproductor();
+    public void reproduirFitxer(FitxerReproduible fr) throws AplicacioException{
+        CarpetaFitxers singular = new CarpetaFitxers(1);
+        singular.addFitxer(fr);
+        e.iniciarReproduccio(singular, reproduccioCiclica, reproduccioAleatoria);
     }
     
     
@@ -255,7 +257,24 @@ public class Dades implements Serializable {
         }
         
     }
+    public void reemprenReproduccio() throws AplicacioException {
+        r.resume();
+    }
+
     
+    public void pausaReproduccio() throws AplicacioException {
+        r.pause();
+    }
+
+    
+    public void aturaReproduccio() throws AplicacioException {
+        r.stop();
+    }
+
+    
+    public void saltaReproduccio() throws AplicacioException {
+        
+    }
     
     
 }

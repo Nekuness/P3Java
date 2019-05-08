@@ -90,13 +90,29 @@ public class AplicacioUB2 {
             opcio = menu.getOpcio(sc);
             switch (opcio) {
                 case MENU_PRINCIPAL_OPCIO1:
-                    MenuPrincipalOP1();
+                    try{
+                        MenuPrincipalOP1();
+                    }
+                    catch(Exception e){
+                        System.out.println("Ha hagut un error en el programa");
+                    }
                     break;
                 case MENU_PRINCIPAL_OPCIO2:
-                    MenuPrincipalOP2();
+                    try{
+                        MenuPrincipalOP2();
+                    }
+                    catch(Exception e){
+                        System.out.println("Ha hagut un error en el programa");
+                    }
                     break;
                 case MENU_PRINCIPAL_OPCIO3:
-                    MenuPrincipalOP3();
+                    try{
+                        MenuPrincipalOP3();
+                    }
+                    catch(Exception e){
+                        System.out.println("Hi ha hagut un error en el programa");
+                    }
+                    
                     break;
 
                 case MENU_PRINCIPAL_SORTIR:
@@ -198,24 +214,24 @@ public class AplicacioUB2 {
 
             switch (opcio) {
                 case MENU_S3_OPCIO1:
-                    
+                    SubmenuControlOP1(teclat);
                     break;
                 case MENU_S3_OPCIO2:
                     SubmenuControlOP2(teclat);
                     break;
                 case MENU_S3_OPCIO3:
-                    
+                    c1.reproduccioCiclica();
                     break;
 
                 case MENU_S3_OPCIO4:
-                    
+                    c1.reproduccioAleatoria();
                     break;
 
                 case MENU_S3_OPCIO5:
                     
                     break;
                 case MENU_S3_OPCIO6:
-                    
+                    manager(teclat);
                     break;
             }
 
@@ -272,8 +288,10 @@ public class AplicacioUB2 {
                     break;
                 case 2:
                     Submenu2OP2(sc);
+                    break;
                 case 3:
                     gestioMenuSecundari(sc);
+                    break;
 
             }
         } while (opcio != 4);
@@ -310,8 +328,10 @@ public class AplicacioUB2 {
                     for(String temp: titols){
                         System.out.println(temp);
                     }
+                    break;
                 case 3:
                     gestioMenuSecundari(sc);
+                    break;
                 case 4:
                     break;
 
@@ -398,6 +418,39 @@ public class AplicacioUB2 {
     
     void SubmenuControlOP2(Scanner sc) throws AplicacioException{
         c1.reproduirCarpeta();
+    }
+    
+    void gestioMenuQuart(Scanner sc) throws AplicationException, IOException, FileNotFoundException, ClassNotFoundException, AplicacioException {
+        Scanner teclat = sc;
+        System.out.println("Has triat la opció de Gestio Reproduccio");
+        int opcio;
+        do {
+            System.out.println("----------------------");
+            System.out.println("1.- Re-Empren");
+            System.out.println("2.- Pausa");
+            System.out.println("3.- Atura");
+            System.out.println("4.- Salta ");
+            System.out.println("5.- Sortir");
+            System.out.println("----------------------");
+            opcio = sc.nextInt();
+            switch (opcio) {
+                case 1:
+                    c1.reemprenReproduccio();
+                    break;
+                case 2:
+                    c1.pausaReproduccio();
+                    break;
+                case 3:
+                    c1.aturaReproduccio();
+                    break;
+                case 4:
+                    c1.saltaReproduccio();
+                case 5:
+                    gestioMenuSecundariOP3(teclat);
+                    
+
+            }
+        } while (opcio != 4);
     }
 
 }

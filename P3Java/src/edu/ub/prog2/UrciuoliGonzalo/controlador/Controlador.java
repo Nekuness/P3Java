@@ -92,7 +92,7 @@ public class Controlador implements InControlador {
        }
     }
     
-    public void reproduirFitxer(FitxerReproduible fr){
+    public void reproduirFitxer(FitxerReproduible fr) throws AplicacioException{
         d1.reproduirFitxer(fr);
     }
     @Override
@@ -144,22 +144,22 @@ public class Controlador implements InControlador {
 
     @Override
     public void reemprenReproduccio() throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.reemprenReproduccio();
     }
 
     @Override
     public void pausaReproduccio() throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.pausaReproduccio();
     }
 
     @Override
     public void aturaReproduccio() throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.aturaReproduccio();
     }
 
     @Override
     public void saltaReproduccio() throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        d1.saltaReproduccio();
     }
 
     public AlbumFitxersMultimedia seleccionAlbum(int id) {
@@ -174,4 +174,12 @@ public class Controlador implements InControlador {
     public void reproduirCarpeta(String string) throws AplicacioException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void reproduccioAleatoria(){
+        d1.repAleatoria();
+    }
+    
+    public void reproduccioCiclica(){
+        d1.repCiclica();
+}
 }
