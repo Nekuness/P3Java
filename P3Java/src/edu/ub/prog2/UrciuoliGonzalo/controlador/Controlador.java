@@ -155,6 +155,7 @@ public class Controlador implements InControlador {
     @Override
     public void aturaReproduccio() throws AplicacioException {
         d1.aturaReproduccio();
+        d1.tancarFinestraReproductor();
     }
 
     @Override
@@ -182,4 +183,10 @@ public class Controlador implements InControlador {
     public void reproduccioCiclica(){
         d1.repCiclica();
 }
+    public void reproduirBiblioteca(){
+        d1.setReproductor();
+        d1.obrirFinestraReproductor();
+        d1.reproduirBiblioteca();
+        d1.tancarFinestraReproductor();
+    }
 }

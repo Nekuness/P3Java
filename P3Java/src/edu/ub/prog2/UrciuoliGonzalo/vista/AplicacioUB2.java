@@ -220,18 +220,18 @@ public class AplicacioUB2 {
                     SubmenuControlOP2(teclat);
                     break;
                 case MENU_S3_OPCIO3:
-                    c1.reproduccioCiclica();
+                    
                     break;
 
                 case MENU_S3_OPCIO4:
-                    c1.reproduccioAleatoria();
+                    c1.reproduccioCiclica();
                     break;
 
                 case MENU_S3_OPCIO5:
-                    
+                    c1.reproduccioAleatoria();
                     break;
                 case MENU_S3_OPCIO6:
-                    manager(teclat);
+                    gestioMenuQuart(teclat);
                     break;
             }
 
@@ -451,6 +451,12 @@ public class AplicacioUB2 {
 
             }
         } while (opcio != 4);
+    }
+    
+    void reproduccioAlbum(Scanner sc){
+        System.out.println("Selecciona la ID de l'album a reproduir");
+        int id = sc.nextInt();
+        
     }
 
 }

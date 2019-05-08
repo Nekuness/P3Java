@@ -22,6 +22,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
@@ -229,6 +231,13 @@ public class Dades implements Serializable {
         e.iniciarReproduccio(singular, reproduccioCiclica, reproduccioAleatoria);
     }
     
+    public void reproduirBiblioteca(){
+        try {
+            e.iniciarReproduccio(biblio, reproduccioCiclica, reproduccioAleatoria);
+        } catch (AplicacioException ex) {
+            Logger.getLogger(Dades.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
     public void setReproductor(){
